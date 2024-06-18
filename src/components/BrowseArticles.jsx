@@ -8,7 +8,6 @@ const BrowseArticles = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        console.log("app-effect activated")
         getArticles()
             .then((results) => {
                 setArticleList(results.articles);

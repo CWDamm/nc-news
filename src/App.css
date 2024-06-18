@@ -49,12 +49,22 @@ h3 {
   border: 1px solid blue;
   flex: 1 1 200px;
   max-width: 230px;
+  position: relative;
 }
 
 .article-card-big {
   border: 1px solid blue;
   flex: 1 1 400px;
   max-width: 475px;
+  position: relative;
+}
+
+#article-card-votes{
+  margin: 0px;
+  font-size: 1.25rem;
+  color: grey;
+  position: absolute;
+  bottom: 0px;
 }
 
 .article-img {
@@ -92,10 +102,7 @@ h3 {
 }
 
 #article-page-img {
-  border: 1px solid red;
-  /* display: block;
-  margin-left: auto;
-  margin-right: auto; */
+  border: 1px solid black;
 }
 
 #comment-container{
@@ -123,4 +130,51 @@ h3 {
 
 #comment-show-button {
   font-size: 1.25rem;
+}
+
+.up-vote-button-clicked {
+  border: none;
+  background-color: smokegrey;
+  border: 1px solid green;
+  color: green;
+  font-weight: bold;
+}
+
+.down-vote-button-clicked {
+  border: none;
+  background-color: smokegrey;
+  border: 1px solid red;
+  color: red;
+  font-weight: bold;
+}
+
+#counter-no-vote {
+  font-size: 2.5rem;
+  padding-right: 10px;
+}
+
+#counter-no-vote {
+  font-size: 2.5rem;
+  padding-right: 10px;
+}
+
+#counter-no-vote {
+  font-size: 2.5rem;
+  padding-right: 10px;
+}
+
+#counter-up-voted {
+  font-size: 2.5rem;
+  padding-right: 10px;
+  color: green;
+}
+
+#counter-down-voted {
+  font-size: 2.5rem;
+  padding-right: 10px;
+  color: red;
+}
+
+#up-vote-icon {
+  font-size: 2.5rem;
 }
