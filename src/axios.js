@@ -11,3 +11,11 @@ export const getArticles = (article_id) => {
             return response.data
         })
 };
+
+export const getComments = (article_id) => {
+    return ncNewsApi
+    .get(`/articles/${article_id}/comments`)
+    .then(response => {
+            return response.data
+        })
+};
