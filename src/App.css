@@ -78,6 +78,15 @@ h3 {
   padding: 15px;
 }
 
+.article-author{
+  font-weight: bold;
+}
+
+.article-time-stamp{
+  color: grey;
+  font-size: 1.25rem;
+}
+
 #article-page-img-container {
   margin-left: 25px;
 }
@@ -87,4 +96,31 @@ h3 {
   /* display: block;
   margin-left: auto;
   margin-right: auto; */
+}
+
+#comment-container{
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.comment-header{
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-time-stamp {
+  color: grey;
+}
+
+.comment-body{
+  font-size: 1rem;
+}
+
+.comment-author {
+  font-weight: bold;
+  color: red;
+}
+
+#comment-show-button {
+  font-size: 1.25rem;
 }
