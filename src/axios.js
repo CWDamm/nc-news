@@ -19,3 +19,12 @@ export const getComments = (article_id) => {
             return response.data
         })
 };
+
+export const changeVotes = (article_id, change) => {
+    return ncNewsApi
+    .patch(`/articles/${article_id}`, { inc_votes: change })
+    .then(response => {
+        return response
+    })
+}
+
