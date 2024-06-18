@@ -1,33 +1,34 @@
 import { useState, useEffect } from 'react'
-import {getArticles} from '../axios';
+import { getArticles } from '../axios';
 import ArticleCard from './ArticleCard';
 
 const BrowseArticles = () => {
 
     const [articleList, setArticleList] = useState([])
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-      console.log("app-effect activated")
-      getArticles()
-      .then((results) => {
-        console.log(results)
-        setArticleList(results.articles);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        console.log("app-effect activated")
+        getArticles()
+            .then((results) => {
+                setArticleList(results.articles);
+                setIsLoading(false)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, [])
-  
 
+
+    if(isLoading) return <p>Loading articles</p>
     return (
-        <main id = "articles-container">
-            {console.log("here", Array.isArray(articleList))}
-            {articleList.map((article) => {
-          return (
-            <ArticleCard key={article.article_id} article={article}/>
-          );
-        })}
-        </main>
+        <ul id="articles-container">
+            {articleList.map((article, index) => {
+                return (
+                    <ArticleCard key={article.article_id} article={article} index={index}/>
+                );
+            })}
+        </ul>
     )
 }
 

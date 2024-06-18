@@ -1,5 +1,6 @@
 #root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 1.5rem;
   max-width: 1280px;
   margin: 0;
   padding: 0;
@@ -9,10 +10,13 @@
 body {
   border: 1px solid black;
   margin: 0 auto;
-  padding: 0;
+  padding: 15px;
   min-width: 320px;
-  min-height: 100vh;
   max-width: 1000px;
+}
+
+a {
+  text-decoration: none;
 }
 
 header {
@@ -21,35 +25,66 @@ header {
 }
 
 h1 {
-  color:red;
-  font-size: 3.2em;
+  color: red;
+  font-size: 5rem;
   line-height: 1.1;
   padding-left: 15px;
 }
 
+h3 {
+  font-size: 1.5rem;
+}
+
 #articles-container {
-  padding: 15px;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   column-gap: 15px;
   row-gap: 15px;
   margin: 10px auto 70px auto;
-  min-width: 325px;
-  justify-content: space-between;
+  justify-content: center;
+  list-style-type: none;
 }
 
 .article-card {
   border: 1px solid blue;
-  flex: 1 1 auto;
-  width: 200px;
+  flex: 1 1 200px;
+  max-width: 230px;
+}
+
+.article-card-big {
+  border: 1px solid blue;
+  flex: 1 1 400px;
+  max-width: 475px;
 }
 
 .article-img {
-  display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
-  margin: 0px auto;
-  max-width: 300px;
+  max-width: 230px;
+  aspect-ratio: 1/1;
 }
 
+.article-img-big {
+  width: 100%;
+  /* max-width: 230px; */
+  aspect-ratio: 1/1;
+}
+
+.article-card-headlines {
+  color: black;
+  text-align: center;
+}
+
+#article-page {
+  padding: 15px;
+}
+
+#article-page-img-container {
+  margin-left: 25px;
+}
+
+#article-page-img {
+  border: 1px solid red;
+  /* display: block;
+  margin-left: auto;
+  margin-right: auto; */
+}
