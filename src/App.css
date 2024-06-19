@@ -15,6 +15,10 @@ body {
   max-width: 1000px;
 }
 
+button{
+  font-size: 1.25rem;
+}
+
 a {
   text-decoration: none;
 }
@@ -22,6 +26,22 @@ a {
 header {
   border: 1px solid red;
   width: 100%;
+}
+
+#sign-in-bar{
+  border: 1px solid red;
+  padding-right: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 70px;
+}
+
+#sign-in-indicator{
+  padding-right: 15px;
+  vertical-align: top;
+  font-weight: 450;
 }
 
 h1 {
@@ -35,146 +55,3 @@ h3 {
   font-size: 1.5rem;
 }
 
-#articles-container {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 15px;
-  row-gap: 15px;
-  margin: 10px auto 70px auto;
-  justify-content: center;
-  list-style-type: none;
-}
-
-.article-card {
-  border: 1px solid blue;
-  flex: 1 1 200px;
-  max-width: 230px;
-  position: relative;
-}
-
-.article-card-big {
-  border: 1px solid blue;
-  flex: 1 1 400px;
-  max-width: 475px;
-  position: relative;
-}
-
-#article-card-votes{
-  margin: 0px;
-  font-size: 1.25rem;
-  color: grey;
-  position: absolute;
-  bottom: 0px;
-}
-
-.article-img {
-  width: 100%;
-  max-width: 230px;
-  aspect-ratio: 1/1;
-}
-
-.article-img-big {
-  width: 100%;
-  /* max-width: 230px; */
-  aspect-ratio: 1/1;
-}
-
-.article-card-headlines {
-  color: black;
-  text-align: center;
-}
-
-#article-page {
-  padding: 15px;
-}
-
-.article-author{
-  font-weight: bold;
-}
-
-.article-time-stamp{
-  color: grey;
-  font-size: 1.25rem;
-}
-
-#article-page-img-container {
-  margin-left: 25px;
-}
-
-#article-page-img {
-  border: 1px solid black;
-}
-
-#comment-container{
-  list-style-type: none;
-  padding-left: 0;
-}
-
-.comment-header{
-  display: flex;
-  justify-content: space-between;
-}
-
-.comment-time-stamp {
-  color: grey;
-}
-
-.comment-body{
-  font-size: 1rem;
-}
-
-.comment-author {
-  font-weight: bold;
-  color: red;
-}
-
-#comment-show-button {
-  font-size: 1.25rem;
-}
-
-.up-vote-button-clicked {
-  border: none;
-  background-color: smokegrey;
-  border: 1px solid green;
-  color: green;
-  font-weight: bold;
-}
-
-.down-vote-button-clicked {
-  border: none;
-  background-color: smokegrey;
-  border: 1px solid red;
-  color: red;
-  font-weight: bold;
-}
-
-#counter-no-vote {
-  font-size: 2.5rem;
-  padding-right: 10px;
-}
-
-#counter-no-vote {
-  font-size: 2.5rem;
-  padding-right: 10px;
-}
-
-#counter-no-vote {
-  font-size: 2.5rem;
-  padding-right: 10px;
-}
-
-#counter-up-voted {
-  font-size: 2.5rem;
-  padding-right: 10px;
-  color: green;
-}
-
-#counter-down-voted {
-  font-size: 2.5rem;
-  padding-right: 10px;
-  color: red;
-}
-
-#up-vote-icon {
-  font-size: 2.5rem;
-}

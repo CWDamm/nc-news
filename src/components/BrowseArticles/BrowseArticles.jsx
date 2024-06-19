@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { getArticles } from '../axios';
+import { getArticles } from '../../axios';
 import ArticleCard from './ArticleCard';
+import './BrowseArticles.css'
 
 const BrowseArticles = () => {
 
