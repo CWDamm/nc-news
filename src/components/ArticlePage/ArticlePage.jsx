@@ -1,17 +1,17 @@
 import { BsArrowUpShort, BsArrowDownShort } from "react-icons/bs";
+import { BiLike, BiDislike } from "react-icons/bi";
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { getArticles, getComments, changeVotes } from '../axios';
-import CommentCard from './CommentCard'
+import { getArticles, changeVotes } from '../../axios';
+import Comments from './Comments'
+import './ArticlePage.css'
 
-const ArticlePage = () => {
+const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
 
     const { article_id } = useParams();
-    const [currentArticle, setCurrentArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
-    const [commentList, setCommentList] = useState([]);
     const [showComments, setshowComments] = useState(false);
 
     const [hasUpVoted, setHasUpVoted] = useState(false)
@@ -26,17 +26,6 @@ const ArticlePage = () => {
             .catch(err => {
                 console.log(err);
             })
-
-        getComments(article_id)
-            .then(response => {
-                setCommentList(response.comments);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
-        setHasUpVoted(false)
-
     }, [])
 
     const handleOnShowCommentsClick = () => {
@@ -114,7 +103,7 @@ const ArticlePage = () => {
     else if (hasDownVoted) counterFormat = "counter-down-voted"
     else counterFormat = "counter-no-vote"
 
-    if (isLoading) return <p>Loading articles</p>
+    if (isLoading) return <p>Loading article</p>
     return (
         <article id="article-page">
             <h2>{currentArticle.title}</h2>
@@ -125,12 +114,12 @@ const ArticlePage = () => {
                 <button
                     onClick={handleUpVoteCommentsClick}
                     className={upVoteButtonFormat}>
-                    <BsArrowUpShort id="up-vote-icon" />
+                    <BiLike id="up-vote-icon" />
                 </button>
                 <button
                     onClick={handleDownVoteCommentsClick}
                     className={downVoteButtonFormat}>
-                    <BsArrowDownShort id="up-vote-icon" />
+                    <BiDislike id="up-vote-icon" />
                 </button>
             </p>
 
@@ -140,15 +129,9 @@ const ArticlePage = () => {
             <p>{currentArticle.body}</p>
 
             <h3>Comments</h3>
-            <button id="comment-show-button" onClick={handleOnShowCommentsClick}>{!showComments ? "Show comments" : "Hide Comments"}</button>
+            <button className="comment-button" onClick={handleOnShowCommentsClick}>{!showComments ? "Show comments" : "Hide Comments"}</button>
             {showComments ?
-                <section>
-                    <ul id="comment-container">
-                        {commentList.map((comment) => {
-                            return <CommentCard key={comment.comment_id} comment={comment} />
-                        })}
-                    </ul>
-                </section> : null
+               <Comments user={user} article_id={article_id}/> : null
             }
         </article>
     )
