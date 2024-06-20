@@ -7,7 +7,7 @@ const Header = ( {user, setUser }) => {
             <Link to={"/"}>
                 <h1>NC News</h1>
             </Link>
-            <SignInBar user={user} setUser={setUser}/>
+            {/* <SignInBar user={user} setUser={setUser}/> */}
         </header>
     )
 }

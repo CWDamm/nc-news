@@ -4,7 +4,23 @@ const ncNewsApi = axios.create({
     baseURL: "https://be-nc-news-cwdamm.onrender.com/api"
 })
 
-export const getArticles = (article_id) => {
+export const getArticles = (topic) => {
+    return ncNewsApi
+        .get(`/articles`, {params: {"topic": topic}})
+        .then(response => {
+            return response.data
+        })
+};
+
+export const getTopics = () => {
+    return ncNewsApi
+        .get(`/topics`)
+        .then(response => {
+            return response.data
+        })
+};
+
+export const getArticlesById = (article_id) => {
     return ncNewsApi
         .get(article_id ? `/articles/${article_id}` : `/articles/`)
         .then(response => {
@@ -45,7 +61,6 @@ export const postComment = (article_id, body) => {
 }
 
 export const deleteComment = (comment_id) => {
-    console.log(comment_id)
     return ncNewsApi
         .delete(`/comments/${comment_id}`)
 }

@@ -30,7 +30,7 @@ function Comments({ user, article_id }) {
             .catch(err => {
                 console.log(err);
             })
-    }, [])
+    }, [article_id])
 
 
     const handleNewCommentChange = (event) => {
