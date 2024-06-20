@@ -15,8 +15,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <SignInBar user={user}/>
-      <Header />
+      <Header user={user} setUser={setUser}/>
       <Routes>
         <Route path="/" element={<BrowseArticles />} />
         <Route path="/user/login" element={<UserLogIn setUser={setUser} user={user} currentArticle={currentArticle}/>} />

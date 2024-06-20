@@ -1,57 +1,106 @@
-#root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
-  max-width: 1280px;
-  margin: 0;
-  padding: 0;
+* {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 18px;
 }
 
 body {
-  border: 1px solid black;
-  margin: 0 auto;
+  /* border: 1px solid black; */
+  font-family: Noto Sans, sans-serif;
+}
+
+main {
+  /* border: 1px solid pink; */
+  margin: 0px;
   padding: 15px;
   min-width: 320px;
   max-width: 1000px;
+  min-height: 100vh;
+  margin: auto;
+  padding-bottom: 50px;
+  margin-bottom: 50px;
+  background-color: #F6F6F6;
 }
 
-button{
+header {
+  /* border: 1px solid red; */
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+button {
   font-size: 1.25rem;
+}
+
+.spinner{
+  width: 120px;
+  margin: auto;
+  margin-top: 150px;
 }
 
 a {
   text-decoration: none;
 }
 
-header {
-  border: 1px solid red;
-  width: 100%;
-}
-
-#sign-in-bar{
-  border: 1px solid red;
-  padding-right: 5px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  height: 70px;
-}
-
-#sign-in-indicator{
-  padding-right: 15px;
-  vertical-align: top;
-  font-weight: 450;
+p {
+  padding: 5px;
 }
 
 h1 {
-  color: red;
+  color: white;
+  /* background-color: #052962; */
+  background-color: #B80000;
+  font-family: Noto Sans, sans-serif;
   font-size: 5rem;
-  line-height: 1.1;
-  padding-left: 15px;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 50px;
+  padding-top: 0px;
+  height: 175px;
+  line-height: 175px;
+}
+
+h2 {
+  font-family: Noto Sans, sans-serif;
+  font-size: 3rem;
+  padding-bottom: 20px;
 }
 
 h3 {
-  font-size: 1.5rem;
+  color: black;
+  font-size: 1.25rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
+#sign-in-bar {
+  /* border: 1px solid red; */
+  margin: 0px;
+  padding: 0px;
+  padding: 5px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 40px;
+}
+
+#sign-in-indicator {
+  /* border: 1px solid green; */
+  font-size: 1.25rem;
+  font-weight: 450;
+  margin: 0px;
+}
+
+#sign-out-button {
+  margin: 0px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1.25rem;
+  background-color: white;
+  border: none;
+  color: blue;
+  font-weight: bold;
+}
