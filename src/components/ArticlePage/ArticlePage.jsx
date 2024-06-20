@@ -1,10 +1,10 @@
-import { BsArrowUpShort, BsArrowDownShort } from "react-icons/bs";
 import { BiLike, BiDislike } from "react-icons/bi";
+import 'ldrs/dotSpinner'
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { getArticles, changeVotes } from '../../axios';
-import Comments from './Comments'
+import Comments from '../Comments/Comments'
 import './ArticlePage.css'
 
 const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
@@ -95,45 +95,54 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
     const unformattedDate = new Date(currentArticle.created_at);
     const formattedDate = unformattedDate.toLocaleString('en-GB', {});
 
-    let upVoteButtonFormat, downVoteButtonFormat, counterFormat;
-    !hasUpVoted ? upVoteButtonFormat = "vote-button" : upVoteButtonFormat = "up-vote-button-clicked";
-    !hasDownVoted ? downVoteButtonFormat = "vote-button" : downVoteButtonFormat = "down-vote-button-clicked";
+    let upVoteButtonFormat = "vote-button", downVoteButtonFormat = "vote-button";
+    if(hasUpVoted) upVoteButtonFormat += " up-vote-button-clicked"
+    if(hasDownVoted) upVoteButtonFormat += " down-vote-button-clicked"
 
+    let counterFormat;
     if (hasUpVoted) counterFormat = "counter-up-voted"
     else if (hasDownVoted) counterFormat = "counter-down-voted"
-    else counterFormat = "counter-no-vote"
 
-    if (isLoading) return <p>Loading article</p>
     return (
-        <article id="article-page">
-            <h2>{currentArticle.title}</h2>
-            <img id='article-page-img' src={currentArticle.article_img_url} alt="{currentArticle.title}" />
+        <main>
+            {isLoading ?
+                <div className="spinner">
+                    <l-dot-spinner
+                        size="120"
+                        speed="0.9"
+                        color="black"
+                    ></l-dot-spinner>
+                </div> :
+                <section>
+                    <h2>{currentArticle.title}</h2>
+                    <img id='article-page-img' src={currentArticle.article_img_url} alt="{currentArticle.title}" />
 
-            <p>
-                <span id={counterFormat}>{currentArticle.votes}</span>
-                <button
-                    onClick={handleUpVoteCommentsClick}
-                    className={upVoteButtonFormat}>
-                    <BiLike id="up-vote-icon" />
-                </button>
-                <button
-                    onClick={handleDownVoteCommentsClick}
-                    className={downVoteButtonFormat}>
-                    <BiDislike id="up-vote-icon" />
-                </button>
-            </p>
+                    <p className={"voting-button-row" + " " + counterFormat}>
+                        <span id="counter">{currentArticle.votes}</span>
+                        <button
+                            onClick={handleUpVoteCommentsClick}
+                            className={upVoteButtonFormat}>
+                            <BiLike className="vote-icon" />
+                        </button>
+                        <button
+                            onClick={handleDownVoteCommentsClick}
+                            className={downVoteButtonFormat}>
+                            <BiDislike className="vote-icon" />
+                        </button>
+                    </p>
 
-            <p className='article-author'>Author: {currentArticle.author}</p>
-            <p className='article-time-stamp'>{formattedDate}</p>
+                    <p className='article-author'>Author: {currentArticle.author}</p>
+                    <p className='article-time-stamp'>{formattedDate}</p>
 
-            <p>{currentArticle.body}</p>
+                    <p>{currentArticle.body}</p>
 
-            <h3>Comments</h3>
-            <button className="comment-button" onClick={handleOnShowCommentsClick}>{!showComments ? "Show comments" : "Hide Comments"}</button>
-            {showComments ?
-               <Comments user={user} article_id={article_id}/> : null
-            }
-        </article>
+                    <h3>Comments</h3>
+                    <button className="comment-button" onClick={handleOnShowCommentsClick}>{!showComments ? "Show comments" : "Hide Comments"}</button>
+                    {showComments ?
+                        <Comments user={user} article_id={article_id} /> : null
+                    }
+                </section>}
+        </main>
     )
 }
 

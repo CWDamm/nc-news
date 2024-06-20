@@ -20,6 +20,7 @@ function LoginForm( { setUser }) {
             .catch(err => {
                 if (err.response.status === 404) {
                     setShowError(true);
+                    setIsLoading(false);
                 }
             })
     }

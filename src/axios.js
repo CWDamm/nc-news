@@ -44,3 +44,11 @@ export const postComment = (article_id, body) => {
         })
 }
 
+export const deleteComment = (comment_id) => {
+    console.log(comment_id)
+    return ncNewsApi
+        .delete(`/comments/${comment_id}`)
+}
+
+
+
