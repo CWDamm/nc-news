@@ -36,11 +36,13 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
         setCurrentArticle({ ...currentArticle, votes: currentArticle.votes + change })
         return changeVotes(article_id, change)
     }
-
-    const handleUpVoteCommentsClick = () => {
+      
+    const handleUpVoteCommentsClick = (voteChange) => {
+        console.log(voteChange);
         if (hasDownVoted) {
             setHasDownVoted(false);
-            shiftVote(1)
+            setHasUpVoted(true);
+            shiftVote(2)
                 .catch(err => {
                     setHasDownVoted(true);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
@@ -68,7 +70,8 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
     const handleDownVoteCommentsClick = () => {
         if (hasUpVoted) {
             setHasUpVoted(false);
-            shiftVote(-1)
+            setHasDownVoted(true);
+            shiftVote(-2)
                 .catch(err => {
                     setHasUpVoted(true);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
@@ -95,9 +98,8 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
     const unformattedDate = new Date(currentArticle.created_at);
     const formattedDate = unformattedDate.toLocaleString('en-GB', {});
 
-    let upVoteButtonFormat = "vote-button", downVoteButtonFormat = "vote-button";
-    if(hasUpVoted) upVoteButtonFormat += " up-vote-button-clicked"
-    if(hasDownVoted) upVoteButtonFormat += " down-vote-button-clicked"
+    let upVoteButtonFormat = hasUpVoted ? "vote-button" + " up-vote-button-clicked": "vote-button"
+    let downVoteButtonFormat = hasDownVoted ? "vote-button" + " down-vote-button-clicked": "vote-button"
 
     let counterFormat;
     if (hasUpVoted) counterFormat = "counter-up-voted"
