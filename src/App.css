@@ -87,11 +87,56 @@ h3 {
   height: 40px;
 }
 
+#navbar {
+  /* border: 1px solid green; */
+  list-style-type: none;
+  margin-top: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+#navbar a, span {
+  flex: 0 0 auto;
+  border: 1px solid black;
+  color: red;
+  padding: 8px;
+  background-color: #f6f6f6;
+}
+
+.dropdown-btn{
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none; 
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.sign-in{
+  float: right;
+  margin-left: auto;
+}
+
 #sign-in-indicator {
   /* border: 1px solid green; */
   font-size: 1.25rem;
-  font-weight: 450;
-  margin: 0px;
+  float: right;
+  margin-left: auto;
 }
 
 #sign-out-button {
@@ -102,5 +147,5 @@ h3 {
   background-color: white;
   border: none;
   color: blue;
-  font-weight: bold;
+  background-color: #f6f6f6;
 }

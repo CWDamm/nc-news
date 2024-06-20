@@ -3,7 +3,7 @@ import 'ldrs/dotSpinner'
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import { getArticles, changeVotes } from '../../axios';
+import { getArticlesById, changeVotes } from '../../axios';
 import Comments from '../Comments/Comments'
 import './ArticlePage.css'
 
@@ -18,7 +18,7 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
     const [hasDownVoted, setHasDownVoted] = useState(false)
 
     useEffect(() => {
-        getArticles(article_id)
+        getArticlesById(article_id)
             .then(response => {
                 setCurrentArticle(response.article)
                 setIsLoading(false)
