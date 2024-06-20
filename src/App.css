@@ -99,7 +99,15 @@ h3 {
   margin: auto;
 }
 
-#navbar a, span {
+#navbar a {
+  flex: 0 0 auto;
+  border: 1px solid black;
+  color: red;
+  padding: 8px;
+  background-color: #f6f6f6;
+}
+
+#navbar span {
   flex: 0 0 auto;
   border: 1px solid black;
   color: red;
@@ -148,4 +156,18 @@ h3 {
   border: none;
   color: blue;
   background-color: #f6f6f6;
+}
+
+#sort-by-dropdown{
+  margin-left: 10px;
+  padding: 5px;
+}
+
+#order-by-dropdown{
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.drop-down-label{
+  margin-left: 10px;
 }
