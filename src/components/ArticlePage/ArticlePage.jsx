@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import { getArticlesById, changeVotes } from '../../axios';
 import Comments from '../Comments/Comments'
+import NoPathPage from '../NoPathPage'
+
 import './ArticlePage.css'
 
 const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
@@ -19,6 +21,9 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
     const [hasUpVoted, setHasUpVoted] = useState(false)
     const [hasDownVoted, setHasDownVoted] = useState(false)
 
+    const [serverError, setServerError] = useState(null)
+    const [votingError, setVotingError] = useState(false)
+
     useEffect(() => {
         getArticlesById(article_id)
             .then(response => {
@@ -26,7 +31,7 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
                 setIsLoading(false)
             })
             .catch(err => {
-                console.log(err);
+                setServerError(err)
             })
     }, [])
 
@@ -39,29 +44,34 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
         return changeVotes(article_id, change)
     }
       
-    const handleUpVoteCommentsClick = (voteChange) => {
-        console.log(voteChange);
+    const handleUpVoteCommentsClick = () => {
         if (hasDownVoted) {
+            setVotingError(false);
             setHasDownVoted(false);
             setHasUpVoted(true);
             shiftVote(2)
                 .catch(err => {
+                    setVotingError(true);
                     setHasDownVoted(true);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
                 })
         }
         else if (hasUpVoted) {
+            setVotingError(false);
             setHasUpVoted(false);
             shiftVote(-1)
                 .catch(err => {
+                    setVotingError(true);
                     setHasUpVoted(true);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
                 })
         }
         else {
+            setVotingError(false);
             setHasUpVoted(true)
             shiftVote(1)
                 .catch(err => {
+                    setVotingError(true);
                     setHasUpVoted(false);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
                 })
@@ -71,26 +81,32 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
 
     const handleDownVoteCommentsClick = () => {
         if (hasUpVoted) {
+            setVotingError(false);
             setHasUpVoted(false);
             setHasDownVoted(true);
             shiftVote(-2)
                 .catch(err => {
+                    setVotingError(true);
                     setHasUpVoted(true);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
                 })
         }
         else if (hasDownVoted) {
+            setVotingError(false);
             setHasDownVoted(false);
             shiftVote(1)
                 .catch(err => {
+                    setVotingError(true);
                     setHasDownVoted(true);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
                 })
         }
         else {
+            setVotingError(false);
             setHasDownVoted(true)
             shiftVote(-1)
                 .catch(err => {
+                    setVotingError(true);
                     setHasDownVoted(false);
                     setCurrentArticle({ ...currentArticle, votes: currentArticle.votes })
                 })
@@ -107,6 +123,9 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
     if (hasUpVoted) counterFormat = "counter-up-voted"
     else if (hasDownVoted) counterFormat = "counter-down-voted"
 
+    if(serverError) {
+        return <NoPathPage serverError={serverError}/>
+    }
     return (
         <main>
             {isLoading ?
@@ -133,6 +152,7 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
                             className={downVoteButtonFormat}>
                             <BiDislike className="vote-icon" />
                         </button>
+                        {votingError ? <span id="vote-change-error">An error has occured, please try again later</span> : null}
                     </p>
 
                     <p className='article-author'>Author: {currentArticle.author}</p>

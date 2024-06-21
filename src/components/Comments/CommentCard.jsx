@@ -25,7 +25,7 @@ function CommentCard({ comment, user }) {
     }
     const formattedDate = unformattedDate.toLocaleString('en-GB', options);
 
-    function handleClick() {
+    function handleDeleteClick() {
         setIsDeleting(true)
         deleteComment(comment.comment_id)
             .then(() => {
@@ -48,7 +48,7 @@ function CommentCard({ comment, user }) {
                             className="comment-card-author">{comment.author}
                             {user.username === comment.author ?
                                 <span>
-                                    <button className="delete-button" onClick={handleClick}>
+                                    <button className="delete-button" onClick={handleDeleteClick}>
                                         Delete comment
                                     </button>
                                     <IoTrashOutline />
