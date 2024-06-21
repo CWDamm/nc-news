@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { getUser } from '../../axios';
+import 'ldrs/dotSpinner'
 
-function LoginForm( { setUser }) {
+function LoginForm({ setUser }) {
 
     const [formUserName, setFormUserName] = useState("");
     const [showError, setShowError] = useState(false);
@@ -29,7 +30,18 @@ function LoginForm( { setUser }) {
         setFormUserName(event.target.value)
     }
 
-    if(isLoading) return <p>Searching for username</p>
+    if (isLoading) return (
+        <div>
+            <p>Searching for username</p>
+            <div className="spinner">
+                <l-dot-spinner
+                    size="120"
+                    speed="0.9"
+                    color="black"
+                ></l-dot-spinner>
+            </div>
+        </div>
+    )
     return (
         <section>
             <h2>Log in</h2>
@@ -43,8 +55,9 @@ function LoginForm( { setUser }) {
                     </input>
                 </label>
                 {showError ? <p id="sign-in-error">Username not recognised. Please try again.</p> : null}
+                <p id='user-name-hint'> No username? Try our test account using 'tickle122'</p>
                 <p>
-                    <button id={"sign-in-button"}>Submit</button>
+                    <button id="username-submit-button">Submit</button>
                 </p>
             </form>
         </section>

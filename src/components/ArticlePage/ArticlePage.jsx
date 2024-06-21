@@ -1,5 +1,7 @@
 import { BiLike, BiDislike } from "react-icons/bi";
 import 'ldrs/dotSpinner'
+import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropup } from "react-icons/io";
 
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
@@ -139,7 +141,12 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
                     <p>{currentArticle.body}</p>
 
                     <h3>Comments</h3>
-                    <button className="comment-button" onClick={handleOnShowCommentsClick}>{!showComments ? "Show comments" : "Hide Comments"}</button>
+                    <button className="comment-button" onClick={handleOnShowCommentsClick}>
+                        {!showComments ? 
+                        <span>Show comments <IoMdArrowDropdown /></span> : 
+                        <span>Hide comments <IoMdArrowDropup /></span>
+                        }
+                        </button>
                     {showComments ?
                         <Comments user={user} article_id={article_id} /> : null
                     }

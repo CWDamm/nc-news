@@ -22,26 +22,28 @@ function NavBar({ user, setUser }) {
 
     return (
         <nav id="navbar">
-            <Link to="/articles" >Home</Link>
-            <div className="dropdown">
-                <span className='dropdown-btn'>Topics</span>
-                <div className='dropdown-content'>
+            <div id='nav-bar-inner'>
+                <Link id="nav-bar-home-link" to="/articles">Home</Link>
+                <ul className='nav-bar-topic-list'>
                     {topicsList.map(topic => {
-                        return <Link key={topic.slug} to={`/articles/topics/${topic.slug}`}>{capitalise(topic.slug)}</Link>
+                        return (
+                            <li key={topic.slug} className="nav-bar-topics">
+                                <Link className="nav-bar-links" to={`/articles/topics/${topic.slug}`}>{capitalise(topic.slug)}</Link>
+                            </li>)
                     })}
-                </div>
+                </ul>
+
+                {!user.username ?
+                    <span className='sign-in'>
+                        <Link className='sign-in-link' to={"/user/login"}>Sign in</Link>
+                    </span> :
+
+                    <div id="sign-in-container">
+                        <span id='nav-bar-username'>User: {user.username}</span>
+                        <button onClick={handleSignOutClick} id="sign-out-button">Sign out</button>
+                    </div>
+                }
             </div>
-
-            {!user.username ?
-                <span className='sign-in'>
-                    <Link to={"/user/login"}>Sign in</Link>
-                </span> :
-
-                <span id="sign-in-indicator">
-                    User: {user.username}
-                    <button onClick={handleSignOutClick} id="sign-out-button">Sign out</button>
-                </span>
-            }
         </nav>
     )
 }
