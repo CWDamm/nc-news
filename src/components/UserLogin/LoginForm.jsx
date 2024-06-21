@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { getUser } from '../../axios';
-import 'ldrs/dotSpinner'
+import CircularProgress from '@mui/material/CircularProgress';
 
 function LoginForm({ setUser }) {
 
@@ -34,11 +34,7 @@ function LoginForm({ setUser }) {
         <div>
             <p>Searching for username</p>
             <div className="spinner">
-                <l-dot-spinner
-                    size="120"
-                    speed="0.9"
-                    color="black"
-                ></l-dot-spinner>
+                <CircularProgress size="8rem" />
             </div>
         </div>
     )

@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { getTopics } from '../../axios';
+import { UserContext } from '../../contexts/User';
 
+function NavBar( ) {
 
-function NavBar({ user, setUser }) {
+    const { user, setUser } = useContext(UserContext);
 
     const [topicsList, setTopicsList] = useState([])
 
@@ -23,15 +25,17 @@ function NavBar({ user, setUser }) {
     return (
         <nav id="navbar">
             <div id='nav-bar-inner'>
-                <Link id="nav-bar-home-link" to="/articles">Home</Link>
-                <ul className='nav-bar-topic-list'>
-                    {topicsList.map(topic => {
-                        return (
-                            <li key={topic.slug} className="nav-bar-topics">
-                                <Link className="nav-bar-links" to={`/articles/topics/${topic.slug}`}>{capitalise(topic.slug)}</Link>
-                            </li>)
-                    })}
-                </ul>
+                <div id='nav-bar-inner-left'>
+                    <ul className='nav-bar-topic-list'>
+                        <Link id="nav-bar-home-link" to="/articles">Home</Link>
+                        {topicsList.map(topic => {
+                            return (
+                                <li key={topic.slug} className="nav-bar-topics">
+                                    <Link className="nav-bar-links" to={`/articles/topics/${topic.slug}`}>{capitalise(topic.slug)}</Link>
+                                </li>)
+                        })}
+                    </ul>
+                </div>
 
                 {!user.username ?
                     <span className='sign-in'>

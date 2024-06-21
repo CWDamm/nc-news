@@ -8,27 +8,31 @@ import ArticlePage from './components/ArticlePage/ArticlePage'
 import UserLogIn from './components/UserLogin/UserLogIn';
 import NavBar from './components/Navbar/Navbar'
 import NoPathPage from './components/NoPathPage'
+import { UserProvider } from './contexts/User';
+
 
 function App() {
 
-  const [user, setUser] = useState({})
   const [currentArticle, setCurrentArticle] = useState("");
   const [articlesLoading, setArticlesLoading] = useState(false);
 
   return (
+    <UserProvider>
     <BrowserRouter>
-      <Header user={user} setUser={setUser} />
-      <NavBar user={user} setUser={setUser} />
+      <Header />
+      <NavBar />
       <Routes>
         <Route path="/" element={<BrowseArticles articlesLoading={articlesLoading} setArticlesLoading={setArticlesLoading} />} />
         <Route path="/articles" element={<BrowseArticles articlesLoading={articlesLoading} setArticlesLoading={setArticlesLoading} />} />
         <Route path="/articles/topics/:topic" element={<BrowseArticles articlesLoading={articlesLoading} setArticlesLoading={setArticlesLoading} />} />
-        <Route path="/user/login" element={<UserLogIn setUser={setUser} user={user} currentArticle={currentArticle} />} />
-        <Route path="/articles/:article_id" element={<ArticlePage user={user} currentArticle={currentArticle} setCurrentArticle={setCurrentArticle} />} />
+        <Route path="/user/login" element={<UserLogIn currentArticle={currentArticle} />} />
+        <Route path="/articles/:article_id" element={<ArticlePage currentArticle={currentArticle} setCurrentArticle={setCurrentArticle} />} />
         <Route path="*" element={<NoPathPage />} />
       </Routes>
     </BrowserRouter>
+  </UserProvider>
   )
 }
+
 
 export default App

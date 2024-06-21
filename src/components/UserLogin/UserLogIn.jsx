@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom'
 import LoginForm from './LoginForm';
-
+import { UserContext } from '../../contexts/User';
+import { useContext } from 'react'
 import './UserLogin.css'
 
-const UserLogIn = ({ user, setUser, currentArticle }) => {
+const UserLogIn = ({ currentArticle }) => {
+    
+    const { user, setUser } = useContext(UserContext);
 
     return (
         <main>

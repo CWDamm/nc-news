@@ -1,16 +1,18 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 function NoPathPage({ serverError }) {
 
+    const navigate = useNavigate();
+    
     let errMsg = <h3>Page not found</h3>
-    if(serverError) errMsg = <h3>Error {serverError.response.request.status}: {serverError.response.data.msg}</h3>
+    if(serverError) errMsg = <p>Error {serverError.response.request.status}: {serverError.response.data.msg}</p>
 
     return (
         <main>
+            <h3>Whoops! Something went wrong. Please double check the url or follow a different link</h3>
             {errMsg}
-            <p>Please double check the url or follow a different link</p>
             <p className='user-nav-link-container'>
-                <Link className="user-nav-link" to="/">Back to main page</Link>
+                <button className="user-nav-link" onClick={() => navigate(-1)}>Back to previous page</button>
             </p>
         </main>
     )

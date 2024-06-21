@@ -1,17 +1,20 @@
 import { BiLike, BiDislike } from "react-icons/bi";
-import 'ldrs/dotSpinner'
+import CircularProgress from '@mui/material/CircularProgress';
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoMdArrowDropup } from "react-icons/io";
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom';
 import { getArticlesById, changeVotes } from '../../axios';
 import Comments from '../Comments/Comments'
 import NoPathPage from '../NoPathPage'
+import { UserContext } from '../../contexts/User';
 
 import './ArticlePage.css'
 
-const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
+const ArticlePage = ({ currentArticle, setCurrentArticle }) => {
+
+    const { user } = useContext(UserContext);
 
     const { article_id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +46,7 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
         setCurrentArticle({ ...currentArticle, votes: currentArticle.votes + change })
         return changeVotes(article_id, change)
     }
-      
+
     const handleUpVoteCommentsClick = () => {
         if (hasDownVoted) {
             setVotingError(false);
@@ -116,25 +119,21 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
     const unformattedDate = new Date(currentArticle.created_at);
     const formattedDate = unformattedDate.toLocaleString('en-GB', {});
 
-    let upVoteButtonFormat = hasUpVoted ? "vote-button" + " up-vote-button-clicked": "vote-button"
-    let downVoteButtonFormat = hasDownVoted ? "vote-button" + " down-vote-button-clicked": "vote-button"
+    let upVoteButtonFormat = hasUpVoted ? "vote-button" + " up-vote-button-clicked" : "vote-button"
+    let downVoteButtonFormat = hasDownVoted ? "vote-button" + " down-vote-button-clicked" : "vote-button"
 
     let counterFormat;
     if (hasUpVoted) counterFormat = "counter-up-voted"
     else if (hasDownVoted) counterFormat = "counter-down-voted"
 
-    if(serverError) {
-        return <NoPathPage serverError={serverError}/>
+    if (serverError) {
+        return <NoPathPage serverError={serverError} />
     }
     return (
         <main>
             {isLoading ?
                 <div className="spinner">
-                    <l-dot-spinner
-                        size="120"
-                        speed="0.9"
-                        color="black"
-                    ></l-dot-spinner>
+                    <CircularProgress size="8rem"/>
                 </div> :
                 <section>
                     <h2>{currentArticle.title}</h2>
@@ -162,11 +161,11 @@ const ArticlePage = ({ user, currentArticle, setCurrentArticle }) => {
 
                     <h3>Comments</h3>
                     <button className="comment-button" onClick={handleOnShowCommentsClick}>
-                        {!showComments ? 
-                        <span>Show comments <IoMdArrowDropdown /></span> : 
-                        <span>Hide comments <IoMdArrowDropup /></span>
+                        {!showComments ?
+                            <span>Show comments <IoMdArrowDropdown /></span> :
+                            <span>Hide comments <IoMdArrowDropup /></span>
                         }
-                        </button>
+                    </button>
                     {showComments ?
                         <Comments user={user} article_id={article_id} /> : null
                     }
