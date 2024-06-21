@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
-import SignInBar from '../components/SignInBar'
 
-const Header = ( {user, setUser }) => {
+const Header = () => {
     return (
         <header>
-            <Link to={"/"}>
+            <Link id="main-header-link" to={"/"}>
                 <h1>NC News</h1>
             </Link>
-            {/* <SignInBar user={user} setUser={setUser}/> */}
         </header>
     )
 }
