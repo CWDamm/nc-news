@@ -48,3 +48,7 @@
   margin-right: 5px;
 }
 
+#vote-change-error{
+  color: red;
+  margin-left: 10px;
+}

@@ -4,8 +4,9 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import ArticleCard from './ArticleCard';
 import 'ldrs/dotSpinner'
 import './BrowseArticles.css'
+import NoPathPage from '../NoPathPage'
 
-const BrowseArticles = ({ articlesLoading, setArticlesLoading }) => {
+const BrowseArticles = ({ currentArticle, articlesLoading, setArticlesLoading }) => {
 
     const { topic } = useParams();
     const capitalise = (str) => str.slice(0, 1).toUpperCase() + str.slice(1)
@@ -18,6 +19,9 @@ const BrowseArticles = ({ articlesLoading, setArticlesLoading }) => {
     const [sortByOrder, setSortByOrder] = useState("desc")
     let [searchParams, setSearchParams] = useSearchParams();
 
+    const [serverError, setServerError] = useState(null)
+
+
     useEffect(() => {
         setArticlesLoading(true)
         getArticles(topic, sortByParam, sortByOrder)
@@ -26,18 +30,22 @@ const BrowseArticles = ({ articlesLoading, setArticlesLoading }) => {
                 setArticlesLoading(false)
             })
             .catch((err) => {
-                console.log(err);
+                setServerError(err)
             });
     }, [topic, sortByParam, sortByOrder])
 
     const handleSortByChange = (event) => {
         setSortByParam(event.target.value);
-        setSearchParams({sort_by: event.target.value, order: searchParams.get('order')})
+        setSearchParams({ sort_by: event.target.value, order: searchParams.get('order') })
     }
 
     const handleOrderByChange = (event) => {
         setSortByOrder(event.target.value);
-        setSearchParams({sort_by: searchParams.get('order'), order: event.target.value})
+        setSearchParams({ sort_by: searchParams.get('sort_by'), order: event.target.value })
+    }
+
+    if(serverError) {
+        return <NoPathPage serverError={serverError}/>
     }
 
     return (
@@ -69,7 +77,7 @@ const BrowseArticles = ({ articlesLoading, setArticlesLoading }) => {
                         id='order-by-dropdown'
                         value={sortByOrder}>
                         <option value="desc">Descending</option>
-                        <option selected value="asc">Ascending</option>
+                        <option value="asc">Ascending</option>
                     </select>
                     <label className='drop-down-label' htmlFor='order-by-dropdown'>order
                     </label>

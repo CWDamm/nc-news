@@ -8,7 +8,7 @@ const UserLogIn = ({ user, setUser, currentArticle }) => {
     return (
         <main>
             {!user.username ?
-                <LoginForm setUser={setUser}/> :
+                < LoginForm setUser={setUser} /> :
                 <section>
                     <h2>Log in successful</h2>
                     <h3>Welcome back {user.name.split(" ")[0]}!</h3>
