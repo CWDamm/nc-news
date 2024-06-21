@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { deleteComment } from '../../axios';
 import './Comments.css'
 import 'ldrs/dotSpinner'
+import { IoTrashOutline } from "react-icons/io5";
 
 const spinner = <l-dot-spinner
     className="comment-spinner"
@@ -43,7 +44,16 @@ function CommentCard({ comment, user }) {
             {!commentDeleted ?
                 (<section>
                     <p className="comment-card-header">
-                        <span className="comment-card-author">{comment.author}</span>
+                        <span
+                            className="comment-card-author">{comment.author}
+                            {user.username === comment.author ?
+                                <span>
+                                    <button className="delete-button" onClick={handleClick}>
+                                        Delete comment
+                                    </button>
+                                    <IoTrashOutline />
+                                </span> : null}
+                        </span>
                         <span className="comment-card-time-stamp">{formattedDate}</span>
                     </p>
 
@@ -58,11 +68,6 @@ function CommentCard({ comment, user }) {
                         <p className="comment-card-body">{comment.body}</p>
                     }
 
-                    {user.username === comment.author ?
-                        (<p className="delete-button">
-                            <button onClick={handleClick}>Delete comment</button>
-                        </p>) : null
-                    }
                 </section>) : <p id='delete-comment-success'>Comment deleted!</p>
             }
         </li >

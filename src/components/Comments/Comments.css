@@ -17,7 +17,8 @@
 .comment-card-body {
     font-size: 1rem;
     margin-bottom: 0px;
-    /* border: 1px solid green; */
+    padding-bottom: 15px; 
+    border-bottom: 1px solid lightgrey;
 }
 
 #comment-form {
@@ -40,12 +41,16 @@
 }
 
 #comments-container {
-    border: 1px solid red;
+    border: none;
 }
 
 .comment-button {
-    font-size: 1.25rem;
+    color: red;
+    text-decoration: underline;
+    font-size: 1rem;
     margin-bottom: 20px;
+    border: none;
+    background-color: #f6f6f6;
 }
 
 .comment-form-input {
@@ -76,6 +81,15 @@
     font-size: 1rem;
 }
 
-#delete-button {
+.delete-button {
  margin: 0px;
+ color: red;
+ font-size: 1rem;
+ margin-bottom: 5px;
+ margin-top: 5px;
+ margin-left: 10px;
+ margin-right: 10px;
+ border: none;
+ background-color: #f6f6f6;
+ text-decoration: underline;
 }
